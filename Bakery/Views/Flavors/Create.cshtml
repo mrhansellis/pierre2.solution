@@ -1,0 +1,17 @@
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+@model Bakery.Models.Flavor
+
+<h2>Add a Recipe for @User.Identity.Name</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.FlavorName)
+  @Html.TextBoxFor(model => model.FlavorName)
+
+  <input type="submit" value="Add Flavor" class="btn btn-danger" id="add_flavor_btn"/>
+}
+
+<p>@Html.ActionLink("Flavor List", "Index")</p>
