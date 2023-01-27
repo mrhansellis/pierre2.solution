@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Bakery.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Bakery.Controllers;
-
-public class HomeController : Controller
+namespace Bakery.Controllers
 {
-
-	public IActionResult Index()
+	public class HomeController : Controller
 	{
-		return View();
+		[HttpGet("/")]
+		public ActionResult Index()
+		{
+			return View();
+		}
 	}
 }
