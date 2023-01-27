@@ -25,7 +25,7 @@ namespace Bakery
 
 			builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 											.AddEntityFrameworkStores<BakeryContext>()
-											.AddDefaultTokenproviders();
+											.AddDefaultTokenProviders();
 
 			// builder.Services.Configure<IdentityOptions>(options => 
       // {
