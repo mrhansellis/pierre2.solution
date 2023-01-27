@@ -1,8 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
+@using Bakery.Models;
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<h1 class="display-4">Welcome Friends of Pierre</h1>
+
+	<h4>Flavors</h4>
+	<p>@Html.ActionLink("Flavors", "Index", "Flavors")</p>
+	@if (Model["flavors"].Length == 0)
+	{
+		<p>There are no flavors in the system.</p>
+	}
+	<ul>
+	@foreach (Flavor flv in Model["flavors"])
+	{
+		<li>@Html.ActionLink(@flv.FlavorName, "Details", "Flavors", new { id = @flv.FlavorId })</li>
+	}
+	</ul>
+
+	<h4>Treats</h4>
+	<p>@Html.ActionLink("Treats", "Index", "Treats")</p>
+	@if (Model["treats"].Length == 0)
+	{
+		<p>There are no treats in the system.</p>
+	}
+	<ul>
+	@foreach (Treat trt in Model["treats"])
+	{
+		<li>@Html.ActionLink(@trt.TreatName, "Details", "Treats", new { id = @trt.TreatId })</li>
+	}
+	</ul>
 </div>
