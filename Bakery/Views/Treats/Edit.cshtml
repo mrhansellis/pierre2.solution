@@ -1,0 +1,20 @@
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+@model Bakery.Models.Treat
+
+<h2>Edit Treat</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TreatId)
+
+  @Html.LabelFor(model => model.TreatName)
+  @Html.EditorFor(model => model.TreatName)
+
+  <input type="submit" value="Save"/>
+}
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Treat list", "Index")</p>
