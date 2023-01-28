@@ -98,7 +98,7 @@ namespace Bakery.Controllers
         _db.FlavorTreats.Add(new FlavorTreat() { TreatId = treatId, FlavorId = flavor.FlavorId });
         _db.SaveChanges();
       }
-      return RedirectToAction("Details,", new { id = flavor.FlavorId });
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
 
     [HttpPost]
