@@ -24,5 +24,10 @@ namespace Bakery.Controllers
 			model.Add("treats", trt);
 			return View(model);
 		}
+
+		public ActionResult Privacy()
+		{
+			return View();
+		}
 	}
 }

@@ -15,4 +15,16 @@ html {
 
 body {
   margin-bottom: 60px;
+  background: radial-gradient(circle, #F9EBC8, #FEFBE7)
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+a {
+  color: #A0BCC2;
+  font-weight: 700;
+  text-decoration: none;
 }
