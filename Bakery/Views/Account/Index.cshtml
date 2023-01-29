@@ -1,0 +1,24 @@
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+<hr />
+
+<h2>Account</h2>
+<hr />
+
+@if(User.Identity.IsAuthenticated)
+{
+  <p>Welcome To The Business @User.Identity.Name!</p>
+  @using (Html.BeginForm("LogOff", "Account"))
+  {
+    <input type="submit" class="btn btn-danger" value="Log out"/>
+  }
+}
+else
+{
+  <p>Create an account to access certain features of the site.</p>
+  <p>@Html.ActionLink("Register", "Register")</p>
+  <p>or</p>
+  <p>@Html.ActionLink("Log in", "Login")</p>
+}
