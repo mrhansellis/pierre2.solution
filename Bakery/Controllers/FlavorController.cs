@@ -1,18 +1,24 @@
 using Bakery.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Bakery.Controllers
 {
   public class FlavorsController : Controller
   {
-  private readonly BakeryContext _db;
+    private readonly BakeryContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public FlavorsController(BakeryContext db)
+    public FlavorsController(UserManager<ApplicationUser> userManager,BakeryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -22,13 +28,14 @@ namespace Bakery.Controllers
       return View(model);
     }
 
+    [Authorize]
     public ActionResult Create()
     {
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Flavor flavor)
+    public async Task<ActionResult> Create(Flavor flavor)
     {
       if(!ModelState.IsValid)
       {
@@ -36,6 +43,9 @@ namespace Bakery.Controllers
       }
       else
       {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        flavor.User = currentUser;
         _db.Flavors.Add(flavor);
         _db.SaveChanges();
         return RedirectToAction("Index");
@@ -51,6 +61,7 @@ namespace Bakery.Controllers
       return View(thisFlavor);
     }
 
+    [Authorize]
     public ActionResult Edit(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
@@ -65,6 +76,7 @@ namespace Bakery.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
@@ -80,6 +92,7 @@ namespace Bakery.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult AddTreat(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -101,6 +114,7 @@ namespace Bakery.Controllers
       return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
