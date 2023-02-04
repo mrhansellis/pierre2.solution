@@ -24,6 +24,7 @@ Hans Ellis January 2023
 - Markdown
 - MySQL Workbench
 - Razor
+- Identity
 - Notepad
 - VS Code
 
